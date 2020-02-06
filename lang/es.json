@@ -1,0 +1,15 @@
+{
+    "mstrNotAuthorizationHeader": { "code": "mstrNotAuthorizationHeader", "message": "Tu petición no tiene cabecera de autorización" },
+    "mstrGetUsersSuccess": { "code": "mstrGetUsersSuccess", "message": "Usuarios cargados correctamente" },
+    "mstrGetUsersError": { "code": "mstrGetUsersError", "message": "Error al cargar usuarios" },
+    "mstrSaveObj": { "code": "mstrSaveObj", "message": "Registrado correctamente" },
+    "mstrUpdateObj": { "code": "mstrUpdateObj", "message": "Actualizado correctamente" },
+    "mstrDeleteObj": { "code": "mstrDeleteObj", "message": "Eliminado correctamente" },
+    "mstrErrorSaveObj": { "code": "mstrErrorSaveObj", "message": "Error de registro" },
+    "mstrUserNotFound": { "code": "mstrUserNotFound", "message": "Usuario no encotrado" },
+    "mstrInvalidCredentials": { "code": "mstrInvalidCredentials", "message": "Credenciales inválidas" },
+    "mstrAccessGranted": { "code": "mstrAccessGranted", "message": "Acceso permitido" },
+    "mstrInvalidToken": { "code": "mstrInvalidToken", "message": "Token Inválido" },
+    "mstrAllowedAction": { "code": "mstrAllowedAction", "message": "Acción permitida" },
+    "mstrErrorUpdateUser": { "code": "mstrErrorUpdateUser", "message": "Usuario no actulizado" }
+}
