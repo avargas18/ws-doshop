@@ -6,7 +6,7 @@ const lang = require('../lang/es')
 const constant = require('../util/constant')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const checkToken = require('../middleware/auth')
+const auth = require('../middleware/auth')
 
 let User = require('../models').user
 
@@ -52,7 +52,7 @@ app.post('/', (req, res) => {
         return res.jsonp(params)
     })
 })
-app.put('/:id', checkToken, (req, res) => {
+app.put('/:id', auth, (req, res) => {
     let params = []
     let id = req.params.id
     let body = req.body
@@ -88,7 +88,7 @@ app.put('/:id', checkToken, (req, res) => {
         return res.jsonp(params)
     })
 })
-app.delete('/:id', checkToken, (req, res) => {
+app.delete('/:id', auth, (req, res) => {
     let params = []
     let id = req.params.id
     User.deleteOne({_id: id}, (err) => {
