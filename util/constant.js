@@ -1,9 +1,9 @@
 'use strict'
 
 const ResponseCode = {
-    error: 'ERROR',
-    success: 'SUCCESS',
-    warning: 'WARNING'
+    error: 'error',
+    success: 'success',
+    warning: 'warning'
 }
 
 module.exports = {
