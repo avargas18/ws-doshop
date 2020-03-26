@@ -8,6 +8,8 @@
     "mstrGetCategoriesError": { "code": "mstrGetCategoriesError", "message": "Error al cargar categorias" },
     "mstrGetProductsSuccess": { "code": "mstrGetProductsSuccess", "message": "Productos cargados correctamente" },
     "mstrGetProductsError": { "code": "mstrGetProductsError", "message": "Error al cargar productos" },
+    "mstrGetPermissionsSuccess": { "code": "mstrGetPermissionsSuccess", "message": "Permisos cargados correctamente" },
+    "mstrGetPermissionsError": { "code": "mstrGetPermissionsError", "message": "Error al cargar permisos" },
     "mstrSaveObj": { "code": "mstrSaveObj", "message": "Registrado correctamente" },
     "mstrUpdateObj": { "code": "mstrUpdateObj", "message": "Actualizado correctamente" },
     "mstrDeleteObj": { "code": "mstrDeleteObj", "message": "Eliminado correctamente" },

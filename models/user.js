@@ -14,6 +14,8 @@ const userSchema = new Schema({
     password: { type: String, required: [true, 'La contraseña es requerida'] },
     img: { type: String, required: false },
     role: { type: String, default: 'USR', enum: validRoles },
+    phone: { type: Number },
+    birth_date: { type: Date },
     google: { type: Boolean, default: false },
     create_by: { type: Object, default: 'system' },
 	create_at: { type: Date },

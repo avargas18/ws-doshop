@@ -3,8 +3,8 @@ const express = require('express')
 const app = express()
 const lang = require('../lang/es')
 const constant = require('../util/constant')
-const jwt = require('jsonwebtoken')
 const auth = require('../middleware/auth')
+const { decodedToken } = require('../util/util')
 
 let Category = require('../models').category
 
@@ -24,24 +24,17 @@ app.get('/', (req, res) => {
         return res.jsonp(params)
     })
 })
-app.post('/', (request, response) => {
+app.post('/', auth, (request, response) => {
     let params = []
     let body = request.body
     let token = request.query.token
-    let userAction = {}
-    jwt.verify(token, process.env.SEED, (err, decoded) => {
-        if (err) {
-            return
-        } else {
-            userAction = decoded.user
-            return userAction
-        }
-    })
-    let objCategory = {
+    // decoded token
+    let system_user = decodedToken(token)
+    let objCategory = new Category({
         name: body.name,
-        create_by: userAction,
+        create_by: system_user,
         create_at: new Date()
-    }
+    })
     objCategory.save((err, oCategory) => {
         if (err) {
             params[0] = lang.mstrErrorSaveObj.code,
@@ -56,23 +49,16 @@ app.post('/', (request, response) => {
         return response.jsonp(params)
     })
 })
-app.put('/', auth, (request, response) => {
+app.put('/:id', auth, (request, response) => {
     let params = []
     let id = request.params.id
     let body = request.body
     let token = request.query.token
-    let userAction = {}
-    jwt.verify(token, process.env.SEED, (err, decoded) => {
-        if (err) {
-            return
-        } else {
-            userAction = decoded.user
-            return userAction
-        }
-    })
+    // decoded token
+    let system_user = decodedToken(token)
     let objCategory = {
         name: body.name,
-        modified_by: userAction,
+        modified_by: system_user,
         modified_at: new Date()
     }
     Category.updateOne({_id: id}, objCategory, (err, success) => {
@@ -89,7 +75,7 @@ app.put('/', auth, (request, response) => {
         response.jsonp(params)
     })
 })
-app.delete('/', auth, (request, response) => {
+app.delete('/:id', auth, (request, response) => {
     let params = []
     let id = request.params.id
     Category.deleteOne({_id: id}, (err) => {

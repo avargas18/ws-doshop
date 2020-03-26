@@ -5,8 +5,8 @@ const app = express()
 const lang = require('../lang/es')
 const constant = require('../util/constant')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const auth = require('../middleware/auth')
+const { decodedToken } = require('../util/util')
 
 let User = require('../models').user
 
@@ -57,21 +57,15 @@ app.put('/:id', auth, (req, res) => {
     let id = req.params.id
     let body = req.body
     let token = req.query.token
-    let userAction = {}
-    // Decode token
-    jwt.verify(token, process.env.SEED, (err, decoded) => {
-        if (err) {
-            return
-        } else {
-            userAction = decoded.user
-            return userAction
-        }
-    })
+    // decoded token
+    let system_user = decodedToken(token)
     let objUser = {
         name: body.name,
         email: body.email,
+        phone: body.phone,
+        birth_date: body.birth_date,
         role: body.role,
-        modified_by: userAction,
+        modified_by: system_user,
         modified_at: new Date()
     }
     User.updateOne({_id: id}, objUser, (err, success) => {

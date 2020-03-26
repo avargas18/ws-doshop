@@ -29,7 +29,7 @@ app.post('/', (req, res) => {
         } else {
             oUser.password = ''
             // Generate access token
-            let token = jwt.sign({user: oUser}, process.env.SEED,{expiresIn: 7200}) // 2 hours
+            let token = jwt.sign({user: oUser}, process.env.SEED,{expiresIn: process.env.EXP_TOKEN}) // 48h
             params[0] = lang.mstrAccessGranted.code,
             params[1] = constant.ResponseCode.success,
             params[2] = lang.mstrAccessGranted.message,

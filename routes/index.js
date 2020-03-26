@@ -21,8 +21,9 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/access', controllers.access)
 app.use('/user', controllers.user)
-app.use('/store', controllers.store),
-app.use('/category', controllers.category),
+app.use('/store', controllers.store)
+app.use('/category', controllers.category)
 app.use('/product', controllers.product)
+app.use('/permission', controllers.permission)
 
 module.exports = app

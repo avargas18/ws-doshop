@@ -4,8 +4,8 @@ const express = require('express')
 const app = express()
 const lang = require('../lang/es')
 const constant = require('../util/constant')
-const jwt = require('jsonwebtoken')
 const auth = require('../middleware/auth')
+const { decodedToken } = require('../util/util')
 
 let Product = require('../models').product
 
@@ -29,16 +29,9 @@ app.post('/', auth, (request, response) => {
     let params = []
     let body = request.body
     let token = request.query.token
-    let userAction = {}
-    jwt.verify(token, process.env.SEED, (err, decoded) => {
-        if (err) {
-            return
-        } else {
-            userAction = decoded.user
-            return userAction
-        }
-    })
-    let objProduct = {
+    // decoded token
+    let system_user = decodedToken(token)
+    let objProduct = new Product({
         name: body.name,
         category: body.category,
         store: body.store,
@@ -47,9 +40,9 @@ app.post('/', auth, (request, response) => {
         images: body.images,
         description: body.description,
         tags: body.tags,
-        create_by: userAction,
+        create_by: system_user,
         create_at: new Date()
-    }
+    })
     objProduct.save((err, oProduct) => {
         if (err) {
             params[0] = lang.mstrErrorSaveObj.code,
@@ -64,20 +57,13 @@ app.post('/', auth, (request, response) => {
         return response.jsonp(params)
     })
 })
-app.put('/', auth, (request, response) => {
+app.put('/:id', auth, (request, response) => {
     let params = []
     let id = request.params.id
     let body = request.body
     let token = request.query.token
-    let userAction = {}
-    jwt.verify(token, process.env.SEED, (err, decoded) => {
-        if (err) {
-            return
-        } else {
-            userAction = decoded.user
-            return userAction
-        }
-    })
+    // decoded token
+    let system_user = decodedToken(token)
     let objProduct = {
         name: body.name,
         category: body.category,
@@ -87,7 +73,7 @@ app.put('/', auth, (request, response) => {
         images: body.images,
         description: body.description,
         tags: body.tags,
-        modified_by: userAction,
+        modified_by: system_user,
         modified_at: new Date()
     }
     Product.updateOne({_id: id}, objProduct, (err, success) => {
@@ -104,7 +90,7 @@ app.put('/', auth, (request, response) => {
         return response.jsonp(params)
     })
 })
-app.delete('/', auth, (request, response) => {
+app.delete('/:id', auth, (request, response) => {
     let params = []
     let id = request.params.id
     Product.deleteOne({_id: id}, (err) => {
