@@ -4,7 +4,8 @@ const controllers = {
     store: require('./store'),
     category: require('./category'),
     product: require('./product'),
-    permission: require('./permissions')
+    permission: require('./permissions'),
+    master: require('./master')
 }
 
 module.exports = controllers

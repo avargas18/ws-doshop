@@ -10,6 +10,8 @@
     "mstrGetProductsError": { "code": "mstrGetProductsError", "message": "Error al cargar productos" },
     "mstrGetPermissionsSuccess": { "code": "mstrGetPermissionsSuccess", "message": "Permisos cargados correctamente" },
     "mstrGetPermissionsError": { "code": "mstrGetPermissionsError", "message": "Error al cargar permisos" },
+    "mstrGetMastersSuccess": { "code": "mstrGetMastersSuccess", "message": "Masters cargados correctamente" },
+    "mstrGetMastersError": { "code": "mstrGetMastersError", "message": "Error al cargar masters" },
     "mstrSaveObj": { "code": "mstrSaveObj", "message": "Registrado correctamente" },
     "mstrUpdateObj": { "code": "mstrUpdateObj", "message": "Actualizado correctamente" },
     "mstrDeleteObj": { "code": "mstrDeleteObj", "message": "Eliminado correctamente" },
@@ -22,5 +24,6 @@
     "mstrAccessGranted": { "code": "mstrAccessGranted", "message": "Acceso permitido" },
     "mstrInvalidToken": { "code": "mstrInvalidToken", "message": "Token Inválido" },
     "mstrAllowedAction": { "code": "mstrAllowedAction", "message": "Acción permitida" },
-    "mstrErrorUpdateUser": { "code": "mstrErrorUpdateUser", "message": "Usuario no actulizado" }
+    "mstrErrorUpdateUser": { "code": "mstrErrorUpdateUser", "message": "Usuario no actulizado" },
+    "mstrUseAuthNormal": { "code": "mstrUseAuthNormal", "message": "Usar autenticación normal" }
 }

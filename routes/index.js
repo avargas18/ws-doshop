@@ -25,5 +25,6 @@ app.use('/store', controllers.store)
 app.use('/category', controllers.category)
 app.use('/product', controllers.product)
 app.use('/permission', controllers.permission)
+app.use('/master', controllers.master)
 
 module.exports = app

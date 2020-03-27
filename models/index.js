@@ -3,7 +3,8 @@ const models = {
     store: require('./store'),
     category: require('./category'),
     product: require('./product'),
-    permissions: require('./permissions')
+    permissions: require('./permissions'),
+    master: require('./master')
 }
 
 module.exports = models

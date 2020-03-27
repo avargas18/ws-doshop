@@ -9,4 +9,4 @@ if (process.env.NODE_DEV === 'dev') {
     db = process.env.PROD_DB_URI
 }
 process.env.DB = db
-process.env.CLIENT_ID_GOOGLE = process.env.CLIENT_ID_GOOGLE || ''
+process.env.CLIENT_ID_GOOGLE = process.env.CLIENT_ID_GOOGLE || '947118140161-cimjqjc68p5uoquh9ui8n9dioefv1hj8.apps.googleusercontent.com'
