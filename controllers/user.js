@@ -12,7 +12,7 @@ let User = require('../models').user
 
 app.get('/', (req, res) => {
     let params = []
-    User.find({inactive: false}, (err, oUsers) => {
+    User.find({}, (err, oUsers) => {
         if (err) {
             params[0] = lang.mstrGetUsersError
             params[1] = constant.ResponseCode.error

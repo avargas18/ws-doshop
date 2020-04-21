@@ -7,6 +7,7 @@ const lang = require('../lang/es')
 const constant = require('../util/constant')
 const {OAuth2Client} = require('google-auth-library')
 const google = new OAuth2Client(process.env.CLIENT_ID_GOOGLE)
+const { decodedToken } = require('../util/util')
 const app = express()
 
 let User = require('../models').user
@@ -26,6 +27,11 @@ async function verify(token) {
         // payload
     }
 }
+
+app.get('/decoded', (request, response) => {
+    let token = request.query.token
+    return response.json(decodedToken(token))
+})
 
 app.post('/google', async (request, response) => {
     let params = []
