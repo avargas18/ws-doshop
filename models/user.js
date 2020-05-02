@@ -16,7 +16,7 @@ const userSchema = new Schema({
     role: { type: String, default: 'USR', enum: validRoles },
     phone: { type: Number },
     birth_date: { type: Date },
-    google: { type: Boolean, default: false },
+    provider: { type: String, default: 'DOSHOP' },
     create_by: { type: Object, default: 'system' },
 	create_at: { type: Date },
 	modified_by: { type: Object },

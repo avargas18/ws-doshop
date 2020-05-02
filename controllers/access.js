@@ -23,7 +23,7 @@ async function verify(token) {
         name: payload.name,
         email: payload.email,
         img: payload.picture,
-        google: true
+        provider: 'GOOGLE'
         // payload
     }
 }
@@ -49,7 +49,7 @@ app.post('/google', async (request, response) => {
             params[2] = lang.mstrUserNotFound.message
         }
         if (oUser) {
-            if (!oUser.google) {
+            if (!oUser.provider) {
                 params[0] = lang.mstrUseAuthNormal.code,
                 params[1] = constant.ResponseCode.error
                 params[2] = lang.mstrUseAuthNormal.message
@@ -67,11 +67,61 @@ app.post('/google', async (request, response) => {
                 email: googleUser.email,
                 password: ':)',
                 img: googleUser.img,
-                google: googleUser.google,
+                provider: googleUser.provider,
                 create_at: new Date()
             })
-            objUser.save((err, gUser) => {
-                let token = jwt.sign({user: gUser}, process.env.SEED, {expiresIn: process.env.EXP_TOKEN}) // 48h
+            objUser.save((err, fUser) => {
+                let token = jwt.sign({user: fUser}, process.env.SEED, {expiresIn: process.env.EXP_TOKEN}) // 48h
+                if (err) {
+                    params[0] = lang.mstrErrorSaveObj.code,
+                    params[1] = constant.ResponseCode.error,
+                    params[2] = `${lang.mstrErrorSaveObj.message} ${err}`
+                } else {
+                    params[0] = lang.mstrSaveObj.code,
+                    params[1] = constant.ResponseCode.success,
+                    params[2] = lang.mstrSaveObj.message,
+                    params[3] = {token}
+                }
+            })
+        }
+        return response.jsonp(params)
+    })
+})
+
+//Facebook
+app.post('/facebook', async (request, response) => {
+    let params = []
+    let userF = request.body
+    User.findOne({email: userF.email}, (err, oUser) => {
+        if (err) {
+            params[0] = lang.mstrUserNotFound.code,
+            params[1] = constant.ResponseCode.error
+            params[2] = lang.mstrUserNotFound.message
+        }
+        if (oUser) {
+            if (!oUser.provider) {
+                params[0] = lang.mstrUseAuthNormal.code,
+                params[1] = constant.ResponseCode.error
+                params[2] = lang.mstrUseAuthNormal.message
+            } else {
+                let token = jwt.sign({user: oUser}, process.env.SEED, {expiresIn: process.env.EXP_TOKEN}) // 48h
+                params[0] = lang.mstrAccessGranted.code,
+                params[1] = constant.ResponseCode.success,
+                params[2] = lang.mstrAccessGranted.message,
+                params[3] = {token}
+            }
+        } else {
+            // save user in the db
+            let objUser = new User({
+                name: userF.name,
+                email: userF.email,
+                password: ':)',
+                img: userF.photoUrl,
+                provider: userF.provider,
+                create_at: new Date()
+            })
+            objUser.save((err, fUser) => {
+                let token = jwt.sign({user: fUser}, process.env.SEED, {expiresIn: process.env.EXP_TOKEN}) // 48h
                 if (err) {
                     params[0] = lang.mstrErrorSaveObj.code,
                     params[1] = constant.ResponseCode.error,
