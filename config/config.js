@@ -6,7 +6,7 @@ let db
 if (process.env.NODE_DEV === 'dev') {
     db = 'mongodb://localhost:27017/doshop'
 } else {
-    db = process.env.PROD_DB_URI
+    db = 'mongodb+srv://lugesan:6QDSlvRIQrBTWw8G@cluster0-ko3th.mongodb.net/doshop' // process.env.PROD_DB_URI
 }
 process.env.DB = db
 process.env.CLIENT_ID_GOOGLE = process.env.CLIENT_ID_GOOGLE || '947118140161-cimjqjc68p5uoquh9ui8n9dioefv1hj8.apps.googleusercontent.com'
