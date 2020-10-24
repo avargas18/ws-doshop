@@ -12,13 +12,11 @@ app.use(function(req, res, next) {
     next()
 })
 
-app.get('/', (req, res) => {
-    let params = []
-    params[0] = 'API REST Doshop!!'
-    return res.jsonp(params)
+app.get('/', (request, response) => {
+    return response.status(200).send('API REST Doshop!!')
 })
 
-// Routes
+// ROUTES
 app.use('/access', controllers.access)
 app.use('/user', controllers.user)
 app.use('/store', controllers.store)

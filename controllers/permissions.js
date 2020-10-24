@@ -1,26 +1,18 @@
 'use strict'
 const express = require('express')
 const app = express()
-const lang = require('../lang/es')
-const constant = require('../util/constant')
+const interfaces = require('../interfaces/index')
+const utils = require('../util/util')
+const methods = interfaces.permissions
 
-let Permission = require('../models').permissions
-
-app.get('/', (req, res) => {
-    let params = []
-    Permission.find({inactive: false}, (err, oPermissions) => {
-        if (err) {
-            params[0] = lang.mstrGetPermissionsError.code,
-            params[1] = constant.ResponseCode.error,
-            params[2] = lang.mstrGetPermissionsError.message
-        } else {
-            params[0] = lang.mstrGetPermissionsSuccess.code,
-            params[1] = constant.ResponseCode.success,
-            params[2] = lang.mstrGetPermissionsSuccess.message,
-            params[3] = oPermissions
-        }
-        return res.jsonp(params)
-    })
+app.get('/', (request, response) => {
+    methods.get()
+        .then((data) => {
+            return response.status(200).send(utils.objectResponse(data))
+        })
+        .catch((err) => {
+            return response.status(500).send(utils.objectResponse(err))
+        })
 })
 
 module.exports = app

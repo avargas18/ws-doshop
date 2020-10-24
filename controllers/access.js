@@ -49,7 +49,7 @@ app.post('/google', async (request, response) => {
             params[2] = lang.mstrUserNotFound.message
         }
         if (oUser) {
-            if (!oUser.provider) {
+            if (oUser.provider != 'GOOGLE') {
                 params[0] = lang.mstrUseAuthNormal.code,
                 params[1] = constant.ResponseCode.error
                 params[2] = lang.mstrUseAuthNormal.message
